@@ -61,8 +61,7 @@ Try it instantly with realistic pre-loaded demo slips (Morning Tea Stall, Lunch 
 - **7-Day Projected Sales Trajectory:** Projects expected daily earnings with confidence intervals.
 - **Anomaly Detection (Z-Score > 1.6):** Automatically alerts owners to abnormal revenue dips (rainy day / kitchen downtime) or surges.
 
-* **Live Deployment:** [https://papertoprofit.onrender.com](https://papertoprofit.onrender.com)
-* **Local Run:** Run `./run.bat` or `python -m uvicorn backend.main:app --port 8000` to access the full local UI at `http://127.0.0.1:8000`.
+* **Local Run:** Double-click `./run.bat` (or run `python -m uvicorn backend.main:app --port 8000`) to access the complete application at `http://127.0.0.1:8000`.
 
 ---
 
@@ -87,8 +86,7 @@ The complete source code is open-source under the MIT license:
 │   ├── app.js             # Client-side reactivity, Chart.js charts, clipboard paste
 │   ├── style.css          # Modern typography & receipt paper styling
 │   └── demo_slips/        # Realistic vectorized dhaba and restaurant KOTs
-├── Dockerfile             # Production container for cloud deployment
-├── render.yaml            # Render Blueprint for 1-click zero-config hosting
+├── Dockerfile             # Container configuration
 └── run.bat                # 1-click Windows desktop launcher
 ```
 
@@ -169,7 +167,6 @@ I took the prototype down the street to **"Shree Ganesh Refreshments"**, a local
 ## 🏆 Prize Categories
 
 - **Best Use of TabPFN ($200):** Integrated Prior Labs' **TabPFN-3.5** tabular foundation model to deliver zero-shot 7-day revenue projections and detect anomalous sales drops/surges from tabular restaurant time-series data without model training loops.
-- **Best Use of Render ($200):** Fully containerized with a streamlined `Dockerfile` and `render.yaml` Blueprint for instant, zero-downtime 1-click cloud deployment on Render.
 
 ---
 
