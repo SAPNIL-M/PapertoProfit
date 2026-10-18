@@ -1,7 +1,7 @@
 import os
 import shutil
-from typing import Dict, Any, List
-from fastapi import FastAPI, File, UploadFile, HTTPException
+from typing import Dict, Any, List, Optional
+from fastapi import FastAPI, File, UploadFile, Form, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -59,10 +59,37 @@ class BillCreate(BaseModel):
     notes: str = ""
     items: List[BillItemCreate] = []
 
+class SettingsUpdate(BaseModel):
+    groq_api_key: Optional[str] = None
+
+# Global runtime config
+RUNTIME_CONFIG = {
+    "groq_api_key": os.getenv("GROQ_API_KEY", "")
+}
+
 # --- API Endpoints ---
 
+@app.get("/api/settings")
+def get_settings():
+    has_key = bool(RUNTIME_CONFIG["groq_api_key"])
+    return {
+        "has_groq_key": has_key,
+        "masked_key": (RUNTIME_CONFIG["groq_api_key"][:4] + "..." + RUNTIME_CONFIG["groq_api_key"][-4:]) if has_key else "",
+        "active_engine": "Llama 3.2 Vision (Free Groq Cloud)" if has_key else "Local RapidOCR / Hybrid Vision"
+    }
+
+@app.post("/api/settings")
+def update_settings(settings: SettingsUpdate):
+    if settings.groq_api_key is not None:
+        RUNTIME_CONFIG["groq_api_key"] = settings.groq_api_key.strip()
+        os.environ["GROQ_API_KEY"] = RUNTIME_CONFIG["groq_api_key"]
+    return {"status": "success", "message": "Vision AI settings saved!"}
+
 @app.post("/api/upload")
-async def upload_bill_image(file: UploadFile = File(...)):
+async def upload_bill_image(
+    file: UploadFile = File(...),
+    api_key: Optional[str] = Form(None)
+):
     """Uploads an image slip and runs the open-source vision extraction pipeline."""
     try:
         clean_name = file.filename.replace(" ", "_")
@@ -70,7 +97,8 @@ async def upload_bill_image(file: UploadFile = File(...)):
         with open(dest_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
         
-        extracted_data = extract_bill_data(dest_path, filename=clean_name)
+        effective_key = api_key or RUNTIME_CONFIG["groq_api_key"]
+        extracted_data = extract_bill_data(dest_path, filename=clean_name, api_key=effective_key)
         extracted_data["image_url"] = f"/uploads/{clean_name}"
         return extracted_data
     except Exception as e:

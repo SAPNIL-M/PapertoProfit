@@ -20,9 +20,11 @@ let chartForecast = null;
 document.addEventListener("DOMContentLoaded", () => {
   initTabs();
   initUpload();
+  initSettingsModal();
   loadDemoSlips();
   loadAnalytics();
   loadLedger();
+  loadSettings();
 
   document.getElementById("btn-add-item").addEventListener("click", addEmptyItemRow);
   document.getElementById("btn-save-bill").addEventListener("click", saveVerifiedBill);
@@ -52,6 +54,64 @@ function initTabs() {
       if (target === "ledger") loadLedger();
     });
   });
+}
+
+// Vision AI Engine Settings
+function initSettingsModal() {
+  const modal = document.getElementById("settings-modal");
+  const openBtn = document.getElementById("btn-open-settings");
+  const closeBtn = document.getElementById("btn-close-settings");
+  const cancelBtn = document.getElementById("btn-cancel-settings");
+  const saveBtn = document.getElementById("btn-save-settings");
+  const inputKey = document.getElementById("input-groq-key");
+
+  openBtn.addEventListener("click", () => {
+    const savedKey = localStorage.getItem("groq_api_key") || "";
+    inputKey.value = savedKey;
+    modal.style.display = "flex";
+  });
+
+  const closeModal = () => modal.style.display = "none";
+  closeBtn.addEventListener("click", closeModal);
+  cancelBtn.addEventListener("click", closeModal);
+
+  saveBtn.addEventListener("click", async () => {
+    const key = inputKey.value.trim();
+    localStorage.setItem("groq_api_key", key);
+    
+    await fetch("/api/settings", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ groq_api_key: key })
+    });
+
+    closeModal();
+    loadSettings();
+  });
+}
+
+async function loadSettings() {
+  try {
+    const res = await fetch("/api/settings");
+    const data = await res.json();
+    const badge = document.getElementById("active-engine-badge");
+    const pill = document.getElementById("current-engine-pill");
+
+    const localKey = localStorage.getItem("groq_api_key");
+    const isGroqActive = data.has_groq_key || Boolean(localKey);
+
+    if (isGroqActive) {
+      badge.innerText = "Llama 3.2 Vision (Free Cloud)";
+      pill.innerText = "Llama 3.2 Vision Active";
+      pill.className = "badge badge-green";
+    } else {
+      badge.innerText = "Local OCR / Offline";
+      pill.innerText = "Local OCR Active";
+      pill.className = "badge badge-blue";
+    }
+  } catch (err) {
+    console.error("Failed to load settings", err);
+  }
 }
 
 // Demo Slips Loader
@@ -99,10 +159,8 @@ async function triggerDemoSlipOCR(slip) {
   previewImg.src = slip.image_url;
   scanProgress.style.display = "block";
 
-  // Simulate realistic network OCR latency
   setTimeout(async () => {
     try {
-      // Mock fetch with demo slip query
       const res = await fetch(`/api/upload`, {
         method: "POST",
         body: await createMockFileFormData(slip.filename)
@@ -163,6 +221,11 @@ async function handleFileUpload(file) {
 
   const fd = new FormData();
   fd.append("file", file);
+  
+  const savedKey = localStorage.getItem("groq_api_key");
+  if (savedKey) {
+    fd.append("api_key", savedKey);
+  }
 
   try {
     const res = await fetch("/api/upload", {
