@@ -18,3 +18,8 @@ static/uploads/*
 Thumbs.db
 .vscode/
 .idea/
+
+# Large media files (hosted on YouTube)
+*.mp4
+*.mov
+*.avi
