@@ -61,7 +61,7 @@
 
   <!-- Vision Engine Settings Modal -->
   <div id="settings-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 100; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
-    <div class="card" style="width: 100%; max-width: 520px; margin: 1.5rem; background: white; box-shadow: var(--shadow-lg);">
+    <div class="card" style="width: 100%; max-width: 540px; margin: 1.5rem; background: white; box-shadow: var(--shadow-lg); max-height: 90vh; overflow-y: auto;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
         <div style="display: flex; align-items: center; gap: 0.5rem;">
           <i data-lucide="settings" style="width: 20px; height: 20px; color: var(--primary);"></i>
@@ -73,23 +73,42 @@
       </div>
 
       <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1.25rem;">
-        <h4 style="font-size: 0.95rem; font-weight: 700; color: #1e293b; margin-bottom: 0.3rem;">Testing with Real External Bills</h4>
+        <h4 style="font-size: 0.95rem; font-weight: 700; color: #1e293b; margin-bottom: 0.3rem;">Testing with Uploaded Bill Photos</h4>
         <p style="font-size: 0.825rem; color: var(--text-muted); line-height: 1.45;">
-          You can test real external bill photos using two free open-source methods:
+          PaperToProfit supports three AI extraction pipelines:
         </p>
         <ul style="font-size: 0.825rem; color: var(--text-muted); margin: 0.5rem 0 0 1.25rem; line-height: 1.45;">
-          <li><strong>Local OCR (100% Offline):</strong> Reads printed lines &amp; receipts on CPU without any API key or internet.</li>
-          <li><strong>Free Llama 3.2 11B Vision:</strong> High-precision open-weight model hosted on Groq's 100% free tier (reads cursive handwriting &amp; messy dhaba pads).</li>
+          <li><strong>Google Gemini 3.8 Flash (Recommended):</strong> Unrivaled accuracy for messy cursive handwriting, faded carbon paper, and multi-dish orders. 100% free tier via Google AI Studio.</li>
+          <li><strong>Groq Llama 3.2 Vision:</strong> Free cloud open-weight multimodal model.</li>
+          <li><strong>Local RapidOCR (100% Offline):</strong> 2D spatial text clustering on local CPU without any internet or API key.</li>
         </ul>
       </div>
 
+      <!-- Gemini API Key -->
       <div style="margin-bottom: 1.25rem;">
-        <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.4rem;">
-          Groq API Key (Optional for Llama 3.2 Vision)
-        </label>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+          <label style="font-size: 0.85rem; font-weight: 700;">
+            Google Gemini API Key <span class="badge badge-green" style="font-size: 0.7rem; padding: 0.15rem 0.4rem;">Recommended</span>
+          </label>
+          <span id="gemini-status-tag" style="font-size: 0.75rem; color: #059669; font-weight: bold;"></span>
+        </div>
+        <input type="password" id="input-gemini-key" placeholder="AIzaSy..." class="table-input" style="padding: 0.65rem 0.85rem; font-family: monospace;">
+        <span style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 0.35rem;">
+          Free with no credit card at <a href="https://aistudio.google.com/apikey" target="_blank" style="color: var(--primary); font-weight: bold;">aistudio.google.com</a>.
+        </span>
+      </div>
+
+      <!-- Groq API Key -->
+      <div style="margin-bottom: 1.25rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+          <label style="font-size: 0.85rem; font-weight: 700;">
+            Groq API Key (Optional for Llama 3.2 Vision)
+          </label>
+          <span id="groq-status-tag" style="font-size: 0.75rem; color: #4338ca; font-weight: bold;"></span>
+        </div>
         <input type="password" id="input-groq-key" placeholder="gsk_..." class="table-input" style="padding: 0.65rem 0.85rem; font-family: monospace;">
         <span style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 0.35rem;">
-          100% free with no credit card. Get an instant key at <a href="https://console.groq.com/keys" target="_blank" style="color: var(--primary); font-weight: bold;">console.groq.com/keys</a>. Leave blank to use Local Offline OCR.
+          Free tier key at <a href="https://console.groq.com/keys" target="_blank" style="color: var(--primary); font-weight: bold;">console.groq.com/keys</a>.
         </span>
       </div>
 
@@ -139,15 +158,26 @@
             </div>
             
             <div id="dropzone" class="dropzone">
-              <input type="file" id="file-input" accept="image/*" style="display: none;">
+              <input type="file" id="file-input" accept="image/png,image/jpeg,image/webp,image/jpg" style="display: none;">
+              <input type="file" id="camera-input" accept="image/*" capture="environment" style="display: none;">
               <div style="background: var(--primary-light); width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--primary);">
                 <i data-lucide="upload-cloud" style="width: 28px; height: 28px;"></i>
               </div>
-              <h4 style="font-weight: 700; font-size: 1.05rem; margin-bottom: 0.3rem;">Drag &amp; drop or click to upload</h4>
-              <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Supports handwritten receipts, notepad tear-offs &amp; printed bills (PNG, JPG, SVG)</p>
-              <button class="btn btn-outline" onclick="document.getElementById('file-input').click()">
-                <i data-lucide="image" style="width: 15px; height: 15px;"></i> Browse File / Camera
-              </button>
+              <h4 style="font-weight: 700; font-size: 1.05rem; margin-bottom: 0.3rem;">Upload or Snap Any Bill Photo</h4>
+              <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Supports handwritten dhaba pads, printed KOTs, parcel tokens &amp; carbon receipts</p>
+              
+              <div style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;">
+                <button class="btn btn-primary" onclick="document.getElementById('file-input').click()">
+                  <i data-lucide="image" style="width: 15px; height: 15px;"></i> Browse Photo
+                </button>
+                <button class="btn btn-outline" onclick="document.getElementById('camera-input').click()">
+                  <i data-lucide="camera" style="width: 15px; height: 15px;"></i> Snap with Camera
+                </button>
+              </div>
+
+              <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border); font-size: 0.75rem; color: var(--text-muted);">
+                📋 <strong>Tip:</strong> You can also copy any receipt photo &amp; press <kbd style="background: #e2e8f0; padding: 2px 5px; border-radius: 4px; font-family: monospace;">Ctrl + V</kbd> anywhere to scan instantly!
+              </div>
             </div>
 
             <!-- Scanning State Indicator -->

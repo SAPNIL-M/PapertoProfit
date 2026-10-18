@@ -63,11 +63,12 @@ function initSettingsModal() {
   const closeBtn = document.getElementById("btn-close-settings");
   const cancelBtn = document.getElementById("btn-cancel-settings");
   const saveBtn = document.getElementById("btn-save-settings");
-  const inputKey = document.getElementById("input-groq-key");
+  const inputGemini = document.getElementById("input-gemini-key");
+  const inputGroq = document.getElementById("input-groq-key");
 
   openBtn.addEventListener("click", () => {
-    const savedKey = localStorage.getItem("groq_api_key") || "";
-    inputKey.value = savedKey;
+    inputGemini.value = localStorage.getItem("gemini_api_key") || "";
+    inputGroq.value = localStorage.getItem("groq_api_key") || "";
     modal.style.display = "flex";
   });
 
@@ -76,13 +77,19 @@ function initSettingsModal() {
   cancelBtn.addEventListener("click", closeModal);
 
   saveBtn.addEventListener("click", async () => {
-    const key = inputKey.value.trim();
-    localStorage.setItem("groq_api_key", key);
+    const geminiKey = inputGemini.value.trim();
+    const groqKey = inputGroq.value.trim();
+    
+    localStorage.setItem("gemini_api_key", geminiKey);
+    localStorage.setItem("groq_api_key", groqKey);
     
     await fetch("/api/settings", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ groq_api_key: key })
+      body: JSON.stringify({
+        gemini_api_key: geminiKey,
+        groq_api_key: groqKey
+      })
     });
 
     closeModal();
@@ -97,15 +104,27 @@ async function loadSettings() {
     const badge = document.getElementById("active-engine-badge");
     const pill = document.getElementById("current-engine-pill");
 
-    const localKey = localStorage.getItem("groq_api_key");
-    const isGroqActive = data.has_groq_key || Boolean(localKey);
+    const localGemini = localStorage.getItem("gemini_api_key");
+    const localGroq = localStorage.getItem("groq_api_key");
 
-    if (isGroqActive) {
-      badge.innerText = "Llama 3.2 Vision (Free Cloud)";
-      pill.innerText = "Llama 3.2 Vision Active";
+    const isGeminiActive = data.has_gemini_key || Boolean(localGemini);
+    const isGroqActive = data.has_groq_key || Boolean(localGroq);
+
+    const gemTag = document.getElementById("gemini-status-tag");
+    const groqTag = document.getElementById("groq-status-tag");
+    if (gemTag) gemTag.innerText = isGeminiActive ? "✓ Configured & Active" : "";
+    if (groqTag) groqTag.innerText = isGroqActive ? "✓ Configured" : "";
+
+    if (isGeminiActive) {
+      badge.innerText = "Gemini 3.8 Flash Vision (Cloud AI)";
+      pill.innerText = "Gemini 3.8 Flash Active";
       pill.className = "badge badge-green";
+    } else if (isGroqActive) {
+      badge.innerText = "Llama 3.2 Vision (Groq Cloud)";
+      pill.innerText = "Llama 3.2 Vision Active";
+      pill.className = "badge badge-purple";
     } else {
-      badge.innerText = "Local OCR / Offline";
+      badge.innerText = "Local RapidOCR / Offline";
       pill.innerText = "Local OCR Active";
       pill.className = "badge badge-blue";
     }
@@ -183,10 +202,11 @@ async function createMockFileFormData(filename) {
   return fd;
 }
 
-// Upload & Drag-and-Drop Handler
+// Upload, Camera & Drag-and-Drop Handler
 function initUpload() {
   const dropzone = document.getElementById("dropzone");
   const fileInput = document.getElementById("file-input");
+  const cameraInput = document.getElementById("camera-input");
 
   dropzone.addEventListener("dragover", (e) => {
     e.preventDefault();
@@ -208,6 +228,32 @@ function initUpload() {
       handleFileUpload(fileInput.files[0]);
     }
   });
+
+  if (cameraInput) {
+    cameraInput.addEventListener("change", () => {
+      if (cameraInput.files.length > 0) {
+        handleFileUpload(cameraInput.files[0]);
+      }
+    });
+  }
+
+  // Clipboard Paste Support (Ctrl+V / Cmd+V)
+  window.addEventListener("paste", (e) => {
+    if (e.clipboardData && e.clipboardData.items) {
+      for (let item of e.clipboardData.items) {
+        if (item.type && item.type.startsWith("image/")) {
+          const file = item.getAsFile();
+          if (file) {
+            // Switch to scan tab if another tab was active
+            const scanTabBtn = document.querySelector('[data-tab="scan"]');
+            if (scanTabBtn) scanTabBtn.click();
+            handleFileUpload(file);
+            break;
+          }
+        }
+      }
+    }
+  });
 }
 
 async function handleFileUpload(file) {
@@ -222,9 +268,12 @@ async function handleFileUpload(file) {
   const fd = new FormData();
   fd.append("file", file);
   
-  const savedKey = localStorage.getItem("groq_api_key");
-  if (savedKey) {
-    fd.append("api_key", savedKey);
+  const geminiKey = localStorage.getItem("gemini_api_key");
+  const groqKey = localStorage.getItem("groq_api_key");
+  if (geminiKey) fd.append("gemini_api_key", geminiKey);
+  if (groqKey) {
+    fd.append("groq_api_key", groqKey);
+    fd.append("api_key", groqKey);
   }
 
   try {
@@ -232,6 +281,12 @@ async function handleFileUpload(file) {
       method: "POST",
       body: fd
     });
+    
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      throw new Error(errData.detail || `Upload failed with HTTP ${res.status}`);
+    }
+
     const data = await res.json();
     scanProgress.style.display = "none";
     populateReviewCard(data, data.image_url || previewImg.src);

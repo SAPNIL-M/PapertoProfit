@@ -6,6 +6,19 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
+# Auto-load .env
+env_path = os.path.join(os.path.dirname(__file__), "..", ".env")
+if os.path.exists(env_path):
+    try:
+        with open(env_path, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith("#") and "=" in line:
+                    k, v = line.split("=", 1)
+                    os.environ.setdefault(k.strip(), v.strip())
+    except Exception:
+        pass
+
 from backend.db import init_db, get_db
 from backend.extractor import extract_bill_data
 from backend.analytics import compute_analytics
@@ -60,10 +73,12 @@ class BillCreate(BaseModel):
     items: List[BillItemCreate] = []
 
 class SettingsUpdate(BaseModel):
+    gemini_api_key: Optional[str] = None
     groq_api_key: Optional[str] = None
 
 # Global runtime config
 RUNTIME_CONFIG = {
+    "gemini_api_key": os.getenv("GEMINI_API_KEY", ""),
     "groq_api_key": os.getenv("GROQ_API_KEY", "")
 }
 
@@ -71,34 +86,60 @@ RUNTIME_CONFIG = {
 
 @app.get("/api/settings")
 def get_settings():
-    has_key = bool(RUNTIME_CONFIG["groq_api_key"])
+    has_gemini = bool(RUNTIME_CONFIG["gemini_api_key"])
+    has_groq = bool(RUNTIME_CONFIG["groq_api_key"])
+    
+    if has_gemini:
+        active = "Google Gemini 3.8 Flash (Multimodal AI)"
+    elif has_groq:
+        active = "Llama 3.2 Vision (Groq Cloud)"
+    else:
+        active = "Local RapidOCR (100% Offline)"
+
+    def mask(k):
+        return (k[:4] + "..." + k[-4:]) if (k and len(k) > 8) else ""
+
     return {
-        "has_groq_key": has_key,
-        "masked_key": (RUNTIME_CONFIG["groq_api_key"][:4] + "..." + RUNTIME_CONFIG["groq_api_key"][-4:]) if has_key else "",
-        "active_engine": "Llama 3.2 Vision (Free Groq Cloud)" if has_key else "Local RapidOCR / Hybrid Vision"
+        "has_gemini_key": has_gemini,
+        "masked_gemini_key": mask(RUNTIME_CONFIG["gemini_api_key"]),
+        "has_groq_key": has_groq,
+        "masked_groq_key": mask(RUNTIME_CONFIG["groq_api_key"]),
+        "active_engine": active
     }
 
 @app.post("/api/settings")
 def update_settings(settings: SettingsUpdate):
+    if settings.gemini_api_key is not None:
+        RUNTIME_CONFIG["gemini_api_key"] = settings.gemini_api_key.strip()
+        os.environ["GEMINI_API_KEY"] = RUNTIME_CONFIG["gemini_api_key"]
     if settings.groq_api_key is not None:
         RUNTIME_CONFIG["groq_api_key"] = settings.groq_api_key.strip()
         os.environ["GROQ_API_KEY"] = RUNTIME_CONFIG["groq_api_key"]
-    return {"status": "success", "message": "Vision AI settings saved!"}
+    return {"status": "success", "message": "Vision AI settings saved successfully!"}
 
 @app.post("/api/upload")
 async def upload_bill_image(
     file: UploadFile = File(...),
-    api_key: Optional[str] = Form(None)
+    api_key: Optional[str] = Form(None),
+    gemini_api_key: Optional[str] = Form(None),
+    groq_api_key: Optional[str] = Form(None)
 ):
-    """Uploads an image slip and runs the open-source vision extraction pipeline."""
+    """Uploads an image slip and runs the multimodal vision extraction pipeline."""
     try:
         clean_name = file.filename.replace(" ", "_")
         dest_path = os.path.join(UPLOAD_DIR, clean_name)
         with open(dest_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
         
-        effective_key = api_key or RUNTIME_CONFIG["groq_api_key"]
-        extracted_data = extract_bill_data(dest_path, filename=clean_name, api_key=effective_key)
+        eff_gemini = gemini_api_key or RUNTIME_CONFIG["gemini_api_key"]
+        eff_groq = groq_api_key or api_key or RUNTIME_CONFIG["groq_api_key"]
+        
+        extracted_data = extract_bill_data(
+            dest_path,
+            filename=clean_name,
+            gemini_api_key=eff_gemini,
+            groq_api_key=eff_groq
+        )
         extracted_data["image_url"] = f"/uploads/{clean_name}"
         return extracted_data
     except Exception as e:
@@ -135,7 +176,7 @@ def list_recent_bills(limit: int = 25):
     """Retrieves recent bills with their line items."""
     conn = get_db()
     rows = conn.execute("""
-        SELECT * FROM bills ORDER BY created_at DESC LIMIT ?
+        SELECT * FROM bills ORDER BY id DESC LIMIT ?
     """, (limit,)).fetchall()
     
     bills = []
