@@ -1,0 +1,20 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Local Database & Uploads
+papertoprofit.db
+static/uploads/*
+!static/uploads/.gitkeep
+
+# Environment & Logs
+.env
+*.log
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

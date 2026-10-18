@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 550" width="100%" height="100%">
+  <defs>
+    <filter id="paper-shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="3" dy="5" stdDeviation="4" flood-opacity="0.2"/>
+    </filter>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&amp;family=Courier+Prime:wght@700&amp;display=swap');
+      .pen { font-family: 'Caveat', cursive, sans-serif; fill: #7f1d1d; }
+      .stamp { font-family: 'Courier Prime', monospace; fill: #b91c1c; font-weight: bold; }
+    </style>
+  </defs>
+
+  <!-- Pink Parcel / Delivery Slip -->
+  <rect x="15" y="15" width="370" height="520" rx="4" fill="#fff1f2" filter="url(#paper-shadow)" stroke="#fecdd3" stroke-width="1.5"/>
+
+  <rect x="35" y="30" width="160" height="35" rx="4" fill="none" stroke="#b91c1c" stroke-width="2"/>
+  <text x="45" y="54" class="stamp" font-size="16">** TAKE AWAY **</text>
+
+  <text x="235" y="54" class="stamp" font-size="16">TOKEN #19</text>
+  <line x1="25" y1="80" x2="375" y2="80" stroke="#fda4af" stroke-width="1.5"/>
+
+  <text x="35" y="110" class="stamp" font-size="13">DATE: <tspan class="pen" font-size="22">18-OCT 10:15 PM</tspan></text>
+  <line x1="25" y1="130" x2="375" y2="130" stroke="#fda4af" stroke-width="1"/>
+
+  <!-- Items -->
+  <text x="35" y="175" class="pen" font-size="26">2 x Paneer Tikka Roll</text>
+  <text x="330" y="175" class="pen" font-size="26">220</text>
+
+  <text x="35" y="225" class="pen" font-size="26">1 x Egg Chk Dbl Roll</text>
+  <text x="330" y="225" class="pen" font-size="26">130</text>
+
+  <text x="35" y="275" class="pen" font-size="26">2 x Thums Up (Can)</text>
+  <text x="335" y="275" class="pen" font-size="26">80</text>
+
+  <line x1="25" y1="390" x2="375" y2="390" stroke="#fda4af" stroke-width="1.5"/>
+
+  <text x="180" y="420" class="pen" font-size="24">Sub Total:</text>
+  <text x="330" y="420" class="pen" font-size="26">430</text>
+
+  <text x="180" y="450" class="pen" font-size="22">Tax (5%):</text>
+  <text x="335" y="450" class="pen" font-size="22">21.5</text>
+
+  <line x1="160" y1="465" x2="375" y2="465" stroke="#7f1d1d" stroke-width="2"/>
+  <text x="160" y="505" class="pen" font-size="32" font-weight="bold">PAID UPI:</text>
+  <text x="275" y="505" class="pen" font-size="34" font-weight="bold">₹ 451.50</text>
+</svg>

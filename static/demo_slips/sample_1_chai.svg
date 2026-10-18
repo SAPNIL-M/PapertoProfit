@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 550" width="100%" height="100%">
+  <defs>
+    <filter id="paper-shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="3" dy="5" stdDeviation="4" flood-opacity="0.25"/>
+    </filter>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&amp;family=Courier+Prime:wght@700&amp;display=swap');
+      .pen { font-family: 'Caveat', cursive, sans-serif; fill: #1a2a4b; }
+      .stamp { font-family: 'Courier Prime', monospace; fill: #a32222; font-weight: bold; }
+    </style>
+  </defs>
+
+  <!-- Lined Yellow Pad -->
+  <rect x="15" y="15" width="370" height="520" rx="6" fill="#fefae0" filter="url(#paper-shadow)" stroke="#e0d49b" stroke-width="1.5"/>
+  <rect x="15" y="15" width="370" height="40" rx="6" fill="#f0e29d"/>
+  
+  <!-- Red Margin Line -->
+  <line x1="60" y1="55" x2="60" y2="525" stroke="#f28482" stroke-width="1.5" stroke-dasharray="2 1"/>
+  
+  <!-- Faint horizontal lines -->
+  <g stroke="#d4e09b" stroke-width="1" opacity="0.6">
+    <line x1="20" y1="100" x2="380" y2="100"/>
+    <line x1="20" y1="140" x2="380" y2="140"/>
+    <line x1="20" y1="180" x2="380" y2="180"/>
+    <line x1="20" y1="220" x2="380" y2="220"/>
+    <line x1="20" y1="260" x2="380" y2="260"/>
+    <line x1="20" y1="300" x2="380" y2="300"/>
+    <line x1="20" y1="340" x2="380" y2="340"/>
+    <line x1="20" y1="380" x2="380" y2="380"/>
+    <line x1="20" y1="420" x2="380" y2="420"/>
+    <line x1="20" y1="460" x2="380" y2="460"/>
+  </g>
+
+  <!-- Dhaba Stamp -->
+  <text x="70" y="42" class="stamp" font-size="14" letter-spacing="1">SHREE GANESH CHAI &amp; T-STALL</text>
+  <text x="280" y="42" class="stamp" font-size="12">SLIP #42</text>
+
+  <!-- Handwritten Order -->
+  <text x="75" y="92" class="pen" font-size="24">Date: 18 Oct / 9:30 AM</text>
+  <text x="270" y="90" class="pen" font-size="26" font-weight="bold">Table: 2</text>
+
+  <!-- Items -->
+  <text x="75" y="135" class="pen" font-size="28">4 x Sp. Masala Chai</text>
+  <text x="320" y="135" class="pen" font-size="28">100</text>
+
+  <text x="75" y="175" class="pen" font-size="28">2 x Bun Maska</text>
+  <text x="330" y="175" class="pen" font-size="28">80</text>
+
+  <text x="75" y="215" class="pen" font-size="28">2 x Samosa Plate</text>
+  <text x="330" y="215" class="pen" font-size="28">70</text>
+
+  <text x="75" y="255" class="pen" font-size="28">1 x Poha Sev</text>
+  <text x="330" y="255" class="pen" font-size="28">50</text>
+
+  <!-- Scribbled Subtotal & Total -->
+  <line x1="70" y1="380" x2="365" y2="380" stroke="#1a2a4b" stroke-width="2"/>
+  <text x="80" y="412" class="pen" font-size="26">Sub Total:</text>
+  <text x="315" y="412" class="pen" font-size="28">300/-</text>
+
+  <text x="80" y="445" class="pen" font-size="24">GST (5%):</text>
+  <text x="330" y="445" class="pen" font-size="24">15/-</text>
+
+  <line x1="70" y1="455" x2="365" y2="455" stroke="#1a2a4b" stroke-width="2.5"/>
+  <text x="80" y="495" class="pen" font-size="36" font-weight="bold">TOTAL:</text>
+  <text x="280" y="495" class="pen" font-size="40" font-weight="bold">₹ 315/-</text>
+
+  <rect x="240" y="505" width="85" height="24" rx="3" fill="none" stroke="#2a9d8f" stroke-width="1.5" stroke-dasharray="3 2"/>
+  <text x="250" y="522" class="stamp" fill="#2a9d8f" font-size="12">[PAID UPI]</text>
+</svg>

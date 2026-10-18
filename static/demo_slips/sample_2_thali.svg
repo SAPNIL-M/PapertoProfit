@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 550" width="100%" height="100%">
+  <defs>
+    <filter id="paper-shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="3" dy="5" stdDeviation="4" flood-opacity="0.2"/>
+    </filter>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&amp;family=Special+Elite&amp;display=swap');
+      .carbon { font-family: 'Caveat', cursive, sans-serif; fill: #1c3166; font-weight: bold; }
+      .printed { font-family: 'Special Elite', monospace; fill: #2b3a4a; font-size: 13px; }
+    </style>
+  </defs>
+
+  <!-- Carbon Blue Slip Background -->
+  <rect x="15" y="15" width="370" height="520" rx="4" fill="#eaf2f8" filter="url(#paper-shadow)" stroke="#b8d5e5" stroke-width="1.5"/>
+  
+  <!-- Header Print -->
+  <text x="75" y="45" class="printed" font-size="16" font-weight="bold">SHER-E-PUNJAB HIGHWAY DHABA</text>
+  <text x="135" y="65" class="printed" font-size="12">KOT / GUEST MEMO</text>
+  <line x1="25" y1="75" x2="375" y2="75" stroke="#4a6572" stroke-width="1.5"/>
+
+  <!-- Table & Waiter info -->
+  <text x="35" y="100" class="printed">Table No: <tspan class="carbon" font-size="24">7 (Lunch)</tspan></text>
+  <text x="240" y="100" class="printed">KOT No: <tspan class="carbon" font-size="22">108</tspan></text>
+  <text x="35" y="125" class="printed">Date: <tspan class="carbon" font-size="22">18-10-2026 1:45 PM</tspan></text>
+
+  <!-- Table Column Headings -->
+  <line x1="25" y1="135" x2="375" y2="135" stroke="#4a6572" stroke-width="1"/>
+  <text x="35" y="150" class="printed" font-size="11">QTY</text>
+  <text x="80" y="150" class="printed" font-size="11">ITEM DESCRIPTION</text>
+  <text x="260" y="150" class="printed" font-size="11">RATE</text>
+  <text x="325" y="150" class="printed" font-size="11">TOTAL</text>
+  <line x1="25" y1="158" x2="375" y2="158" stroke="#4a6572" stroke-width="1"/>
+
+  <!-- Carbon Hand-Written Items -->
+  <text x="38" y="195" class="carbon" font-size="26">2</text>
+  <text x="80" y="195" class="carbon" font-size="25">Spl Veg Thali</text>
+  <text x="265" y="195" class="carbon" font-size="25">190</text>
+  <text x="330" y="195" class="carbon" font-size="26">380</text>
+
+  <text x="38" y="240" class="carbon" font-size="26">1</text>
+  <text x="80" y="240" class="carbon" font-size="25">Dal Makhani (H)</text>
+  <text x="265" y="240" class="carbon" font-size="25">140</text>
+  <text x="330" y="240" class="carbon" font-size="26">140</text>
+
+  <text x="38" y="285" class="carbon" font-size="26">6</text>
+  <text x="80" y="285" class="carbon" font-size="25">Tandoori B. Roti</text>
+  <text x="270" y="285" class="carbon" font-size="25">20</text>
+  <text x="330" y="285" class="carbon" font-size="26">120</text>
+
+  <text x="38" y="330" class="carbon" font-size="26">2</text>
+  <text x="80" y="330" class="carbon" font-size="25">Sweet Lassi Big</text>
+  <text x="270" y="330" class="carbon" font-size="25">60</text>
+  <text x="330" y="330" class="carbon" font-size="26">120</text>
+
+  <line x1="25" y1="410" x2="375" y2="410" stroke="#4a6572" stroke-width="1.5"/>
+
+  <!-- Total Section -->
+  <text x="180" y="440" class="carbon" font-size="24">Sub Total:</text>
+  <text x="325" y="440" class="carbon" font-size="26">760</text>
+
+  <text x="180" y="470" class="carbon" font-size="22">Tax (5%):</text>
+  <text x="335" y="470" class="carbon" font-size="22">38</text>
+
+  <line x1="170" y1="480" x2="375" y2="480" stroke="#1c3166" stroke-width="2"/>
+  <text x="160" y="515" class="carbon" font-size="32" font-weight="bold">NET CASH:</text>
+  <text x="280" y="515" class="carbon" font-size="34" font-weight="bold">₹ 798/-</text>
+</svg>
