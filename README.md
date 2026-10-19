@@ -10,7 +10,7 @@
 
 ---
 
-![Scan & Digitize Handwritten Bill](docs/scan_and_digitize.png)
+![PaperToProfit Cover Banner](docs/cover_banner.png)
 
 ## 📌 The Problem
 Neighborhood dhabas, local diners, and street tea stalls across the globe operate entirely on **handwritten carbon paper pads (KOTs) and notepad slips**. 

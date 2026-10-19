@@ -2,7 +2,7 @@
 title: "PaperToProfit: Turning Handwritten Dhaba Bills into Revenue & Profit Intelligence with Open-Source AI and TabPFN"
 published: true
 tags: devchallenge, hf26challenge, opensource, ai, python
-cover_image: https://raw.githubusercontent.com/SAPNIL-M/PapertoProfit/main/docs/scan_and_digitize.png
+cover_image: https://raw.githubusercontent.com/SAPNIL-M/PapertoProfit/main/docs/cover_banner.png
 ---
 
 *This is a submission for the [Hacktoberfest Open-Source AI Challenge Week 2: Side Hustle](https://dev.to/challenges/hacktoberfest-week2-2026-10-12)*
