@@ -66,14 +66,19 @@ Because commercial POS systems (like Toast or Petpooja) cost **$60–$180/month*
 
 ## 🚀 Quick Start
 
-### Option 1: 1-Click Launch on Windows
+### Option 1: 1-Click Cloud Deploy on Render
+Deploy instantly to the cloud with zero configuration using the Render Blueprint button:
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/SAPNIL-M/PapertoProfit)
+
+### Option 2: 1-Click Launch on Windows
 Simply double-click:
 ```bat
 run.bat
 ```
 This automatically starts the server and opens your browser at `http://127.0.0.1:8000`.
 
-### Option 2: Manual Setup
+### Option 3: Manual Setup
 
 1. **Clone the repository:**
    ```bash
@@ -129,6 +134,7 @@ This automatically starts the server and opens your browser at `http://127.0.0.1
 │   └── demo_slips/        # Realistic vectorized dhaba and restaurant KOTs
 ├── docs/                  # Screenshots, sample slips, and challenge submission draft
 ├── Dockerfile             # Production container definition
+├── render.yaml            # Render Blueprint for 1-click cloud deployment
 └── run.bat                # 1-click Windows desktop launcher
 ```
 
@@ -137,7 +143,9 @@ This automatically starts the server and opens your browser at `http://127.0.0.1
 ## 🏆 Hacktoberfest 2026 Challenge
 
 * Built for the **[Hacktoberfest Open-Source AI Challenge Week 2: Side Hustle](https://dev.to/challenges/hacktoberfest-week2-2026-10-12)**.
-* **Entered Track:** Best Use of TabPFN ($200).
+* **Entered Tracks:**
+  - **Best Use of TabPFN ($200)** — Zero-shot 7-day predictive sales forecasting & anomaly detection.
+  - **Best Use of Render ($200)** — Infrastructure-as-code Blueprint and production Dockerfile for 1-click cloud deployment.
 
 ---
 

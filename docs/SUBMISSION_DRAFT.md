@@ -70,6 +70,7 @@ Every verified slip is recorded in a local SQLite ledger with 1-click CSV export
 
 ![All Scanned Bills Ledger](https://raw.githubusercontent.com/SAPNIL-M/PapertoProfit/main/docs/all_bills.png)
 
+* **Live Cloud Deployment (Render):** [https://papertoprofit.onrender.com](https://papertoprofit.onrender.com)
 * **Local Run:** Double-click `./run.bat` (or run `python -m uvicorn backend.main:app --port 8000`) to access the complete application at `http://127.0.0.1:8000`.
 
 ---
@@ -95,7 +96,8 @@ The complete source code is open-source under the MIT license:
 │   ├── app.js             # Client-side reactivity, Chart.js charts, clipboard paste
 │   ├── style.css          # Modern typography & receipt paper styling
 │   └── demo_slips/        # Realistic vectorized dhaba and restaurant KOTs
-├── Dockerfile             # Container configuration
+├── Dockerfile             # Production container definition
+├── render.yaml            # Render Blueprint for 1-click cloud deployment
 └── run.bat                # 1-click Windows desktop launcher
 ```
 
@@ -179,6 +181,7 @@ When he saw the app categorize the items and populate the live ledger without an
 ## 🏆 Prize Categories
 
 - **Best Use of TabPFN ($200):** Integrated Prior Labs' **TabPFN-3.5** tabular foundation model to deliver zero-shot 7-day revenue projections and detect anomalous sales drops/surges from tabular restaurant time-series data without model training loops.
+- **Best Use of Render ($200):** Fully containerized with a production `Dockerfile` and `render.yaml` infrastructure-as-code Blueprint for seamless 1-click zero-downtime deployment on Render's cloud platform.
 
 ---
 
