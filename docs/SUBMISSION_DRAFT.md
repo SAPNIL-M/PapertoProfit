@@ -2,7 +2,7 @@
 title: "PaperToProfit: Turning Handwritten Dhaba Bills into Revenue & Profit Intelligence with Open-Source AI and TabPFN"
 published: true
 tags: devchallenge, hf26challenge, opensource, ai, python
-cover_image: https://raw.githubusercontent.com/SAPNIL-M/papertoprofit/main/docs/scan_and_digitize.png
+cover_image: https://raw.githubusercontent.com/SAPNIL-M/PapertoProfit/main/docs/scan_and_digitize.png
 ---
 
 *This is a submission for the [Hacktoberfest Open-Source AI Challenge Week 2: Side Hustle](https://dev.to/challenges/hacktoberfest-week2-2026-10-12)*
@@ -48,27 +48,27 @@ Commercial restaurant POS systems (like Toast, Petpooja, or Lightspeed) cost any
 #### 1. Instant Bill Digitization & 1-Tap Review Screen
 Upload any handwritten or printed bill, snap with mobile camera, or paste directly with `Ctrl + V`. Items, prices, and categories are parsed with confidence scores and rendered in an editable receipt card:
 
-![Scan & Digitize Handwritten Bill](https://raw.githubusercontent.com/SAPNIL-M/papertoprofit/main/docs/scan_and_digitize.png)
+![Scan & Digitize Handwritten Bill](https://raw.githubusercontent.com/SAPNIL-M/PapertoProfit/main/docs/scan_and_digitize.png)
 
 #### 2. Live Financial Dashboard & Rush Heatmap
 Real-time gross revenue, estimated net profit, food costs (COGS), average ticket size, 14-day revenue trajectory, Cash vs. UPI breakdown, and kitchen prep rush-hour distribution:
 
-![Restaurant Financial Dashboard](https://raw.githubusercontent.com/SAPNIL-M/papertoprofit/main/docs/financials.png)
+![Restaurant Financial Dashboard](https://raw.githubusercontent.com/SAPNIL-M/PapertoProfit/main/docs/financials.png)
 
 #### 3. Menu Engineering BCG Matrix
 Automatically categorizes every dish into Stars (promote), Plowhorses (re-engineer price), Puzzles (upsell), and Dogs (drop) based on sales volume and profit margins:
 
-![BCG Menu Engineering Matrix](https://raw.githubusercontent.com/SAPNIL-M/papertoprofit/main/docs/menu_matrix.png)
+![BCG Menu Engineering Matrix](https://raw.githubusercontent.com/SAPNIL-M/PapertoProfit/main/docs/menu_matrix.png)
 
 #### 4. TabPFN Predictive Sales AI & Anomaly Detection
 Uses Prior Labs' TabPFN-3.5 foundation model to forecast next-week revenue trajectory with confidence bounds, flag anomalous revenue spikes/drops ($|Z| > 1.6$), and provide actionable prep recommendations:
 
-![TabPFN Predictive Sales Forecast](https://raw.githubusercontent.com/SAPNIL-M/papertoprofit/main/docs/tab_fpn_forecast.png)
+![TabPFN Predictive Sales Forecast](https://raw.githubusercontent.com/SAPNIL-M/PapertoProfit/main/docs/tab_fpn_forecast.png)
 
 #### 5. Scanned Bills Revenue Ledger
 Every verified slip is recorded in a local SQLite ledger with 1-click CSV export for taxes and accounting:
 
-![All Scanned Bills Ledger](https://raw.githubusercontent.com/SAPNIL-M/papertoprofit/main/docs/all_bills.png)
+![All Scanned Bills Ledger](https://raw.githubusercontent.com/SAPNIL-M/PapertoProfit/main/docs/all_bills.png)
 
 * **Local Run:** Double-click `./run.bat` (or run `python -m uvicorn backend.main:app --port 8000`) to access the complete application at `http://127.0.0.1:8000`.
 
@@ -78,7 +78,7 @@ Every verified slip is recorded in a local SQLite ledger with 1-click CSV export
 
 The complete source code is open-source under the MIT license:
 
-* **GitHub Repository:** [https://github.com/SAPNIL-M/papertoprofit](https://github.com/SAPNIL-M/papertoprofit)
+* **GitHub Repository:** [https://github.com/SAPNIL-M/PapertoProfit](https://github.com/SAPNIL-M/PapertoProfit)
 
 ### Core Architecture
 
@@ -162,7 +162,7 @@ I took the prototype down the street to **"Shree Ganesh Refreshments"**, a local
 ### The Field Test:
 1. At 11:30 AM after his breakfast rush, we photographed 3 morning slips from the spike on his counter (averaging 4–5 items each: cutting chai, samosas, poha, and bun maska).
 
-![Sample Handwritten Bill Slip](https://raw.githubusercontent.com/SAPNIL-M/papertoprofit/main/docs/real_handwritten_bill.jpg)
+![Sample Handwritten Bill Slip](https://raw.githubusercontent.com/SAPNIL-M/PapertoProfit/main/docs/real_handwritten_bill.jpg)
 
 2. Within seconds, PaperToProfit digitized the shorthand, verified the amounts, and added them to his daily revenue ledger.
 3. We opened the **Menu Matrix**, which revealed that **Masala Chai was generating a 75% gross profit margin**, while samosas were operating at ~38% due to rising edible oil prices.

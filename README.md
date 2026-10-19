@@ -77,7 +77,7 @@ This automatically starts the server and opens your browser at `http://127.0.0.1
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/SAPNIL-M/papertoprofit.git
+   git clone https://github.com/SAPNIL-M/PapertoProfit.git
    cd papertoprofit
    ```
 
