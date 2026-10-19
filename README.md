@@ -58,9 +58,9 @@ Because commercial POS systems (like Toast or Petpooja) cost **$60–$180/month*
 |:---:|:---:|
 | ![Menu Matrix](docs/menu_matrix.png) | ![TabPFN Forecast](docs/tab_fpn_forecast.png) |
 
-| 5. Scanned Bills Revenue Ledger | 6. Tested on Real Dhaba Slips |
+| 5. Scanned Bills Revenue Ledger | 6. Tested on Real Shopkeeper Bills |
 |:---:|:---:|
-| ![All Bills Ledger](docs/all_bills.png) | ![Real Dhaba Slip](docs/real_handwritten_bill.jpg) |
+| ![All Bills Ledger](docs/all_bills.png) | ![Real Shopkeeper Bill](docs/real_handwritten_bill.jpg) |
 
 ---
 

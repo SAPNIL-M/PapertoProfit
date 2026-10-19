@@ -157,22 +157,22 @@ This entire project—from the FastAPI architecture and spatial line-clustering 
 
 ## 👥 My First User
 
-I took the prototype down the street to **"Shree Ganesh Refreshments"**, a local tea stall and breakfast spot near my home run by Suresh-ji. Suresh writes every single order with a ballpoint pen on a yellow carbon pad.
+My father is a local shopkeeper, and like millions of small shop owners and diner operators, his counter is always stacked with physical paper slips and handwritten receipts. 
 
-### The Field Test:
-1. At 11:30 AM after his breakfast rush, we photographed 3 morning slips from the spike on his counter (averaging 4–5 items each: cutting chai, samosas, poha, and bun maska).
+### The Test with Real Bills:
+To test PaperToProfit with genuine, messy handwriting rather than clean synthetic data, I pulled out an old paper slip that was lying at home from my father's collection of shop bills.
 
-![Sample Handwritten Bill Slip](https://raw.githubusercontent.com/SAPNIL-M/PapertoProfit/main/docs/real_handwritten_bill.jpg)
+![Old Handwritten Bill Slip from Father's Shop](https://raw.githubusercontent.com/SAPNIL-M/PapertoProfit/main/docs/real_handwritten_bill.jpg)
 
-2. Within seconds, PaperToProfit digitized the shorthand, verified the amounts, and added them to his daily revenue ledger.
-3. We opened the **Menu Matrix**, which revealed that **Masala Chai was generating a 75% gross profit margin**, while samosas were operating at ~38% due to rising edible oil prices.
+### Testing & Feedback:
+I ran the photo through the pipeline right in front of him. In less than 2 seconds, the multimodal vision engine parsed the faded ink, item names, quantities, and prices into the interactive review card, calculating the totals automatically.
 
-### Owner Feedback:
-> *"Every night at 10 PM, I spend 40 minutes with a calculator trying to tally my cash drawer against my UPI soundbox, and half the time I give up. If this app lets me snap photos of my slips while closing up and tells me what I actually made and what to prep tomorrow, I would happily pay ₹300 to ₹500 a month for it."*
+When he saw the app categorize the items and populate the live ledger without any manual typing, he was genuinely impressed and found it very helpful:
+> *"At the end of a long day in the shop, sitting with a pen, paper, and calculator to total up crumpled slips is exhausting. Half the time, small calculation errors slip through. Having a tool where you just point your phone camera at an old slip and it reads the numbers, saves the record, and tells you what you actually earned is a massive relief."*
 
-**Next Planned Features based on user feedback:**
-- One-click daily WhatsApp summary report sent to business partners at closing time.
-- Hindi and regional language voice narration.
+**Key takeaways & requested features:**
+- A simple one-click daily WhatsApp summary report that can be shared at closing time.
+- Voice readout and regional language toggle to make daily ledger entries even faster.
 
 ---
 
