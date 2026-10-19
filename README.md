@@ -40,6 +40,14 @@ Because commercial POS systems (like Toast or Petpooja) cost **$60–$180/month*
 
 ---
 
+## 📺 Video Demo
+
+[![Watch PaperToProfit Demo on YouTube](https://img.youtube.com/vi/6FxF2mufxw0/maxresdefault.jpg)](https://youtu.be/6FxF2mufxw0)
+
+▶️ **[Watch the full 2-minute walkthrough on YouTube (https://youtu.be/6FxF2mufxw0)](https://youtu.be/6FxF2mufxw0)**
+
+---
+
 ## 📸 Screenshots
 
 | 1. Scan & Digitize Bills | 2. Financial Overview & Rush Heatmaps |

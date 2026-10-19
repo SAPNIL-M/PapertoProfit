@@ -37,9 +37,9 @@ Commercial restaurant POS systems (like Toast, Petpooja, or Lightspeed) cost any
 ## 🎥 Demo
 
 ### Video Walkthrough
-{% youtube YOUR_YOUTUBE_ID %}
+{% youtube 6FxF2mufxw0 %}
 
-*(Replace `YOUR_YOUTUBE_ID` with your YouTube video ID after upload, e.g. `dQw4w9WgXcQ`)*
+*Direct Link: [Watch on YouTube (https://youtu.be/6FxF2mufxw0)](https://youtu.be/6FxF2mufxw0)*
 
 ---
 
