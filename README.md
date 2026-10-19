@@ -5,8 +5,11 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115%2B-009688.svg)](https://fastapi.tiangolo.com)
 [![AI: Google Gemini & Groq Vision](https://img.shields.io/badge/Vision%20AI-Gemini%20%26%20Groq%20Llama%203.2-blueviolet)](https://ai.google.dev)
 [![TabPFN](https://img.shields.io/badge/TabPFN-3.5%20Foundation%20Model-orange)](https://github.com/prior-labs/TabPFN)
+[![Live Demo on Render](https://img.shields.io/badge/Live%20Demo-Render-46E3B7.svg?style=flat&logo=render&logoColor=white)](https://papertoprofit.onrender.com)
 
 > **Turn handwritten paper dhaba bills and KOT slips into real-time revenue, gross profit, and predictive sales analytics using open-weight AI and TabPFN.**
+> 
+> 🌐 **Try the Live App:** [https://papertoprofit.onrender.com](https://papertoprofit.onrender.com)
 
 ---
 
