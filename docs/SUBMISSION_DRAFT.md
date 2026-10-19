@@ -145,18 +145,6 @@ Every region has unique handwritten slang (*"cutting chai", "1 pl paneer", "half
 
 ---
 
-## 🤖 My Agent Session
-
-This entire project—from the FastAPI architecture and spatial line-clustering algorithm to the TabPFN predictive integration and mobile-responsive UI—was built with pair-programming assistance from **Antigravity**.
-
-* **Agent Transcript:** [View Agent Session](file:///C:/Users/ASUS/.gemini/antigravity-cli/brain/6e4e4fd6-8e07-44ff-867f-70e6ea4ab1fd/.system_generated/logs/transcript.jsonl)
-* **Key Tasks Accelerated by Agentic Workflow:**
-  - Diagnosed OCR bounding box sorting issues on multi-column receipts and designed the 2D spatial clustering algorithm.
-  - Implemented automatic EXIF transposition for mobile phone camera uploads.
-  - Integrated Prior Labs' TabPFN tabular forecasting and anomaly detection algorithms with mathematical Z-score thresholds.
-
----
-
 ## 👥 My First User
 
 My father is a local shopkeeper, and like millions of small shop owners and diner operators, his counter is always stacked with physical paper slips and handwritten receipts. 
